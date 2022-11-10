@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
       darkTheme: CustomThemes.darkTheme,
       theme: CustomThemes.lightTheme,
       onGenerateRoute: Router.generateRoute,
+      
       // home: const HomePage(),
     );
   }
