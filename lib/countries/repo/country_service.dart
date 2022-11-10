@@ -7,7 +7,7 @@ import '../../utils/constants.dart';
 import 'package:http/http.dart' as https;
 
 class CountryService {
-  static Future<dynamic> getData() async {
+  static Future<Object> getData() async {
     try {
       var url = Uri.parse(Constants.BASE_URL);
       var response = await https.get(url);
@@ -25,7 +25,8 @@ class CountryService {
       return Failure(
           code: Constants.INVALID_FORMAT, errorResponse: 'INVALID_FORMAT');
     } catch (e) {
-      return Failure(code: Constants.UNKNOWN_ERROR, errorResponse: 'UNKNOWN_ERROR')
+      return Failure(
+          code: Constants.UNKNOWN_ERROR, errorResponse: 'UNKNOWN_ERROR');
     }
   }
 }
