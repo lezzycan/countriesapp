@@ -4,18 +4,24 @@ import 'package:hng_stage_3_task/countries/model/country_error.dart';
 import 'package:hng_stage_3_task/countries/repo/api_status.dart';
 import 'package:hng_stage_3_task/countries/repo/country_service.dart';
 
-class CoutriesViewModel with ChangeNotifier {
+class CountriesViewModel extends ChangeNotifier {
   bool _isLoading = false;
   List<CountriesModel> _countriesModel = [];
   CountryError? _countryError;
+  CountriesModel? _selectedCountry;
 
   bool get isLoading => _isLoading;
   List<CountriesModel> get countriesModel => _countriesModel;
   CountryError? get countryError => _countryError;
+  CountriesModel? get selectedCountry => _selectedCountry;
 
   setIsloading(bool isLoading) async {
     _isLoading = isLoading;
     notifyListeners();
+  }
+
+  CountriesViewModel() {
+    getCountries();
   }
 
   setCountriesModel(List<CountriesModel> countriesModel) {
@@ -24,6 +30,10 @@ class CoutriesViewModel with ChangeNotifier {
 
   setCountryError(CountryError countryError) {
     _countryError = countryError;
+  }
+
+  setSelectedCountry(CountriesModel selectedCountry) {
+    _selectedCountry = selectedCountry;
   }
 
   getCountries() async {

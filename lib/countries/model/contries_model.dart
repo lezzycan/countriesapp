@@ -2,7 +2,7 @@
 //
 //     final countriesModel = countriesModelFromJson(jsonString);
 
-// ignore_for_file: constant_identifier_names, unnecessary_null_in_if_null_operators, prefer_null_aware_operators
+// ignore_for_file: constant_identifier_names, unnecessary_null_in_if_null_operators, prefer_null_aware_operators, prefer_conditional_assignment
 
 import 'dart:convert';
 
@@ -156,7 +156,6 @@ class CountriesModel {
         "independent": independent ?? null,
         "status": statusValues.reverse![status],
         "unMember": unMember,
-        
         "currencies": currencies == null ? null : currencies?.toJson(),
         "idd": idd?.toJson(),
         "capital":
@@ -231,7 +230,8 @@ class Car {
       );
 
   Map<String, dynamic> toJson() => {
-        "signs": signs == null ? null : List<dynamic>.from(signs!.map((x) => x)),
+        "signs":
+            signs == null ? null : List<dynamic>.from(signs!.map((x) => x)),
         "side": sideValues.reverse![side],
       };
 }
@@ -1168,6 +1168,7 @@ class EnumValues<T> {
 
   Map<T, String>? get reverse {
     if (reverseMap == null) {
+      // ignore: unnecessary_new
       reverseMap = map.map((k, v) => new MapEntry(v, k));
     }
     return reverseMap;

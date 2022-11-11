@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:hng_stage_3_task/countries/model/contries_model.dart';
 import 'package:hng_stage_3_task/countries/repo/api_status.dart';
 
+import '../../utils.dart';
 import '../../utils/constants.dart';
 import 'package:http/http.dart' as https;
 
@@ -14,7 +15,7 @@ class CountryService {
       if (response.statusCode == 200) {
         return Success(
           code: 200,
-          response: countriesModelFromJson(response.body),
+          response: countriesModelFromJson(response.body)..sort(Utils.ascendingSort),
         );
       }
       return Failure(

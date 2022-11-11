@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names, duplicate_ignore
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // ignore: duplicate_ignore
 class Constants {
@@ -9,7 +10,7 @@ class Constants {
   static Color scaffoldBackgroundlightTheme = Colors.white;
 
   // API URL
-  
+
   static const String BASE_URL = "https://restcountries.com/v3.1/all";
   static const Color kGreyColor = Color(0xFF767680);
 
@@ -19,6 +20,7 @@ class Constants {
   static const int INVALID_FORMAT = 102;
   static const int UNKNOWN_ERROR = 103;
 
-  // TextInputStyle
-  // static const TextStyle =
+  // SwipesStyle
+  static TextStyle swipesTextStyle1 = TextStyle(fontSize: 15.sp,);
+  static TextStyle swipesTextStyle2 = TextStyle(fontSize: 12.sp, fontFamily: 'Poppins-italic.ttf');
 }
