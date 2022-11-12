@@ -9,11 +9,13 @@ class CountriesViewModel extends ChangeNotifier {
   List<CountriesModel> _countriesModel = [];
   CountryError? _countryError;
   CountriesModel? _selectedCountry;
+  String _query = '';
 
   bool get isLoading => _isLoading;
   List<CountriesModel> get countriesModel => _countriesModel;
   CountryError? get countryError => _countryError;
   CountriesModel? get selectedCountry => _selectedCountry;
+  String get query => _query;
 
   setIsloading(bool isLoading) async {
     _isLoading = isLoading;
@@ -36,9 +38,13 @@ class CountriesViewModel extends ChangeNotifier {
     _selectedCountry = selectedCountry;
   }
 
+  setQuery(String query) {
+    _query = query;
+  }
+
   getCountries() async {
     setIsloading(true);
-    var response = await CountryService.getData();
+    var response = await CountryService.getData(query);
     if (response is Success) {
       setCountriesModel(response.response as List<CountriesModel>);
     }
@@ -49,15 +55,31 @@ class CountriesViewModel extends ChangeNotifier {
     }
     setIsloading(false);
   }
-
+// local search
   void searchCountry(String query) {
     var suggestions = countriesModel.where((country) {
       final countryName = country.name!.common!.toLowerCase();
+      final countryCapital = country.capital.toString().toLowerCase();
       final input = query.toLowerCase();
-      return countryName.contains(input);
+      return countryName.contains(input) ||
+      countryCapital.contains(input);
     }).toList();
 
     setCountriesModel(suggestions);
+    setQuery(query);
     notifyListeners();
   }
+  
+  //network search
+  // Future searchCountry(String query) async {
+  //   bool mounted = false;
+  //   final suggestions = await CountryService.getData(query) as List<CountriesModel>;
+
+  //  setCountriesModel(suggestions);
+    
+  //   setQuery(query);
+  //   notifyListeners();
+
+  //   if (!mounted) return;
+  // }
 }

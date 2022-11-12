@@ -1,3 +1,4 @@
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 
 class Swipes extends StatelessWidget {
@@ -9,13 +10,19 @@ class Swipes extends StatelessWidget {
     return Container(
       height: size.height * 0.2,
       width: double.infinity,
-      decoration:
-          BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(
-                image),
-                fit: BoxFit.cover,
-                ),),
+      child: FancyShimmerImage(
+        imageUrl: image,
+        boxFit: BoxFit.cover,
+        errorWidget: Icon(Icons.map),
+        shimmerDuration: Duration(seconds: 1),
+      ),
+      // decoration:
+      //     BoxDecoration(
+      //       image: DecorationImage(
+      //         image: NetworkImage(
+      //           image),
+      //           fit: BoxFit.cover,
+      //           ),),
     );
   }
 }

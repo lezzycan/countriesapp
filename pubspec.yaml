@@ -9,23 +9,23 @@ environment:
   sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
+  card_swiper: ^2.0.4
   cupertino_icons: ^1.0.2
+  fancy_shimmer_image: ^2.0.2
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.6.0
   group_list_view: ^1.1.1
   http: ^0.13.5
   provider: ^6.0.4
-  card_swiper: ^2.0.4
- 
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 
 flutter:
   uses-material-design: true
+  generate: true
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

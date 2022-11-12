@@ -38,8 +38,16 @@ class MyApp extends StatelessWidget {
         darkTheme: CustomThemes.darkTheme,
         theme: CustomThemes.lightTheme,
         onGenerateRoute: Router.generateRoute,
-
-        // home: const HomePage(),
+// localizationsDelegates: [
+//     GlobalMaterialLocalizations.delegate,
+//     GlobalWidgetsLocalizations.delegate,
+//     GlobalCupertinoLocalizations.delegate,
+//   ],
+//   supportedLocales: [
+//     Locale('en', ''), // English, no country code
+//     Locale('es', ''), // Spanish, no country code
+//   ],
+//         // home: const HomePage(),
       ),
     );
   }

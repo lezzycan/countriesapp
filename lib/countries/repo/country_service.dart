@@ -8,7 +8,7 @@ import '../../utils/constants.dart';
 import 'package:http/http.dart' as https;
 
 class CountryService {
-  static Future<Object> getData() async {
+  static Future<Object> getData(String query) async {
     try {
       var url = Uri.parse(Constants.BASE_URL);
       var response = await https.get(url);

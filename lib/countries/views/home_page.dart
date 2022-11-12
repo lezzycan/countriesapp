@@ -5,9 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hng_stage_3_task/components/api_error.dart';
 import 'package:hng_stage_3_task/components/app_loading.dart';
 import 'package:hng_stage_3_task/components/helper_tools.dart';
-import 'package:hng_stage_3_task/components/search_input_panel.dart';
 import 'package:hng_stage_3_task/utils/navigation_utils.dart';
 import 'package:provider/provider.dart';
+import '../../components/search_input_panel.dart';
 import '../model/contries_model.dart';
 import '../view_models/countries_view_model.dart';
 
@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController controller = TextEditingController();
+  //String query = " ";
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -53,16 +53,26 @@ class _HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: theme == Brightness.dark
-                          ? const Icon(Icons.mode_night_rounded,
-                              textDirection: TextDirection.rtl)
-                          : const Icon(Icons.light_outlined),
+                      child: InkWell(
+                          onTap: () {
+                            if (theme == Brightness.dark) {
+                              setState(() {
+                                Icon(Icons.touch_app_sharp);
+                                theme = Brightness.light;
+                              });
+                            }
+                          },
+                          child: Icon(Icons.mode_night_rounded)),
+                      // child: theme == Brightness.dark
+                      //     ? const Icon(Icons.mode_night_rounded,
+                      //         textDirection: TextDirection.rtl)
+                      //     : const Icon(Icons.light_outlined),
                     ),
                   ],
                 ),
                 addVerticalSpace(24.sp),
                 SearchInputPanel(
-                  editingController: controller,
+                  text: countriesViewModel.query,
                   onchanged: countriesViewModel.searchCountry,
                 ),
                 addVerticalSpace(10.sp),
