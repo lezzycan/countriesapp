@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 
 class SearchInputPanel extends StatelessWidget {
-  const SearchInputPanel({Key? key, required this.editingController, required this.onchanged})
+  const SearchInputPanel(
+      {Key? key, required this.editingController, required this.onchanged})
       : super(key: key);
 
   final TextEditingController editingController;
@@ -28,7 +29,7 @@ class SearchInputPanel extends StatelessWidget {
           // ),
           hintText: 'Search Country',
           border: InputBorder.none,
-//enabledBorder: OutlineInputBorder(),
+
           filled: true,
           hintStyle: TextStyle(
               //   color: Constants.kWhiteColor.withOpacity(0.6),

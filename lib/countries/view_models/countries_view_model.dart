@@ -49,4 +49,15 @@ class CountriesViewModel extends ChangeNotifier {
     }
     setIsloading(false);
   }
+
+  void searchCountry(String query) {
+    var suggestions = countriesModel.where((country) {
+      final countryName = country.name!.common!.toLowerCase();
+      final input = query.toLowerCase();
+      return countryName.contains(input);
+    }).toList();
+
+    setCountriesModel(suggestions);
+    notifyListeners();
+  }
 }

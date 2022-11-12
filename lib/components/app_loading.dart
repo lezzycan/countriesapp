@@ -12,7 +12,7 @@ class AppLoading extends StatelessWidget {
       return const Center(
         child: CircularProgressIndicator(
           color: Colors.red,
-          strokeWidth: 8.0,
+          strokeWidth: 4.0,
         ),
       );
     }

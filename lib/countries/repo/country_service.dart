@@ -15,13 +15,17 @@ class CountryService {
       if (response.statusCode == 200) {
         return Success(
           code: 200,
-          response: countriesModelFromJson(response.body)..sort(Utils.ascendingSort),
+          response: countriesModelFromJson(response.body)
+            ..sort(Utils.ascendingSort),
         );
       }
       return Failure(
           code: Constants.INVALID_RESPONSE, errorResponse: 'INVALID_RESPONSE');
     } on HttpException {
       return Failure(code: Constants.NO_INTERNET, errorResponse: 'NO_INTERNET');
+    } on SocketException {
+      return Failure(
+          code: Constants.NO_INTERNET, errorResponse: 'NO_INTERNET CONNECTION');
     } on FormatException {
       return Failure(
           code: Constants.INVALID_FORMAT, errorResponse: 'INVALID_FORMAT');
