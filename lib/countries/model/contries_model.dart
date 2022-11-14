@@ -129,7 +129,7 @@ class CountriesModel {
         car: Car.fromJson(json["car"]),
         timezones: List<String>.from(json["timezones"].map((x) => x)),
         continents: List<Continent>.from(
-            json["continents"].map((x) => continentValues.map[x])),
+            json["continents"].map((x) => continentValues.map[x])).toSet().toList(),
         flags: CoatOfArms.fromJson(json["flags"]),
         coatOfArms: CoatOfArms.fromJson(json["coatOfArms"]),
         startOfWeek: startOfWeekValues.map[json["startOfWeek"]],
@@ -1093,6 +1093,21 @@ class Name {
                 .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
       };
 }
+class Languages {
+  String? ara;
+
+  Languages({this.ara});
+
+  Languages.fromJson(Map<String, dynamic> json) {
+    ara = json['ara'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['ara'] = this.ara;
+    return data;
+  }
+}
 
 class Translation {
   Translation({
@@ -1173,4 +1188,9 @@ class EnumValues<T> {
     }
     return reverseMap;
   }
+
+
+
+
+  
 }

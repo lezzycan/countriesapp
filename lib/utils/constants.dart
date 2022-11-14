@@ -21,6 +21,14 @@ class Constants {
   static const int UNKNOWN_ERROR = 103;
 
   // SwipesStyle
-  static TextStyle swipesTextStyle1 = TextStyle(fontSize: 15.sp,);
-  static TextStyle swipesTextStyle2 = TextStyle(fontSize: 12.sp, fontFamily: 'Poppins-italic.ttf');
+  static TextStyle swipesTextStyle1 = TextStyle(
+    fontSize: 15.sp,
+  );
+  static TextStyle swipesTextStyle2 =
+      TextStyle(fontSize: 12.sp, fontFamily: 'Poppins-italic.ttf');
+
+  // filter TextStyle
+  static TextStyle filterTextStyle = TextStyle(
+    fontSize: 20,
+  );
 }

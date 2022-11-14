@@ -1,20 +1,23 @@
 import 'dart:io';
 
-import 'package:hng_stage_3_task/countries/model/contries_model.dart';
 import 'package:hng_stage_3_task/countries/repo/api_status.dart';
 
 import '../../utils.dart';
 import '../../utils/constants.dart';
 import 'package:http/http.dart' as https;
 
+import '../model/contries_model.dart';
+
 class CountryService {
-  static Future<Object> getData(String query) async {
+  static Future<dynamic> getData() async {
     try {
       var url = Uri.parse(Constants.BASE_URL);
       var response = await https.get(url);
+
       if (response.statusCode == 200) {
         return Success(
           code: 200,
+          // response: CountryModel.countriesFromJson(dataList)..sort(Utils.ascendingSort),
           response: countriesModelFromJson(response.body)
             ..sort(Utils.ascendingSort),
         );

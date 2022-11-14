@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-class SearchInputPanel extends StatefulWidget {
+class SearchInputPanel extends StatefulWidget{
   const SearchInputPanel({
     Key? key,
 
@@ -60,3 +60,4 @@ class _SearchInputPanelState extends State<SearchInputPanel> {
     );
   }
 }
+

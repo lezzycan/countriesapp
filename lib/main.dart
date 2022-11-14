@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hng_stage_3_task/countries/view_models/countries_view_model.dart';
 import 'package:hng_stage_3_task/route_folder/route.dart';
@@ -38,15 +39,15 @@ class MyApp extends StatelessWidget {
         darkTheme: CustomThemes.darkTheme,
         theme: CustomThemes.lightTheme,
         onGenerateRoute: Router.generateRoute,
-// localizationsDelegates: [
-//     GlobalMaterialLocalizations.delegate,
-//     GlobalWidgetsLocalizations.delegate,
-//     GlobalCupertinoLocalizations.delegate,
-//   ],
-//   supportedLocales: [
-//     Locale('en', ''), // English, no country code
-//     Locale('es', ''), // Spanish, no country code
-//   ],
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en', ''), // English, no country code
+          Locale('es', ''), // Spanish, no country code
+        ],
 //         // home: const HomePage(),
       ),
     );

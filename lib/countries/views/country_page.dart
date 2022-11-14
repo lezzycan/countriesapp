@@ -23,137 +23,143 @@ class CountryPage extends StatelessWidget {
         centerTitle: true,
         title: Text('${countriesViewModel.selectedCountry!.name!.common}'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: SizedBox(
-              height: size.height * 0.25,
-              width: double.infinity,
-              child: Swiper.children(
-                // autoplay: true,
-                pagination: const SwiperPagination(
-                    alignment: Alignment.bottomCenter,
-                    builder: DotSwiperPaginationBuilder(
-                        color: Colors.grey, activeColor: Colors.red)),
-                control: SwiperControl(
-                    color:
-                        theme == Brightness.dark ? Colors.white : Colors.black,
-                    //  padding: const EdgeInsets.all(10),
-                    iconPrevious: Icons.arrow_back_outlined,
-                    iconNext: Icons.arrow_forward_outlined),
-                children: [
-                  Swipes(
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: SizedBox(
+                height: size.height * 0.25,
+                width: double.infinity,
+                child: Swiper.children(
+                  // autoplay: true,
+                  pagination: const SwiperPagination(
+                      alignment: Alignment.bottomCenter,
+                      builder: DotSwiperPaginationBuilder(
+                          color: Colors.grey, activeColor: Colors.red)),
+                  control: SwiperControl(
+                      color: theme == Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
+                      //  padding: const EdgeInsets.all(10),
+                      iconPrevious: Icons.arrow_back_outlined,
+                      iconNext: Icons.arrow_forward_outlined),
+                  children: [
+                    Swipes(
+                        image:
+                            '${countriesViewModel.selectedCountry!.flags!.png}'),
+                    Swipes(
+                        image:
+                            '${countriesViewModel.selectedCountry!.coatOfArms!.png}'),
+                    Swipes(
                       image:
-                          '${countriesViewModel.selectedCountry!.flags!.png}'),
-                  Swipes(
-                      image:
-                          '${countriesViewModel.selectedCountry!.coatOfArms!.png}'),
-                  Swipes(
-                    image:
-                        '${countriesViewModel.selectedCountry!.maps!.googleMaps}',
-                  ),
-                ],
+                          '${countriesViewModel.selectedCountry!.maps!.googleMaps}',
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          addVerticalSpace(24.sp),
-          ReuseColumn(
-            countriesViewModel: countriesViewModel,
-            widget: [
-              ReuseRichText(
-                countriesViewModel: countriesViewModel,
-                text: 'Population: ',
-                text2: '${countriesViewModel.selectedCountry!.population}',
-              ),
-              addVerticalSpace(8.0),
-              ReuseRichText(
-                countriesViewModel: countriesViewModel,
-                text: 'Region: ',
-                text2: '${countriesViewModel.selectedCountry!.region}',
-              ),
-              addVerticalSpace(8.0),
-              ReuseRichText(
-                countriesViewModel: countriesViewModel,
-                text: 'Capital: ',
-                text2: countriesViewModel.selectedCountry!.capital
-                    .toString()
-                    .replaceAll('[', '')
-                    .replaceAll(']', ''),
-              ),
-            ],
-          ),
-          addVerticalSpace(12.5.sp),
-          ReuseColumn(
-            countriesViewModel: countriesViewModel,
-            widget: [
-              ReuseRichText(
-                countriesViewModel: countriesViewModel,
-                text: 'Official language: ',
-                text2: countriesViewModel.selectedCountry!.languages
-                    .toString()
-                    .replaceAll('{', '')
-                    .replaceAll('}', ''),
-              ),
-              addVerticalSpace(8.0.sp),
-              ReuseRichText(
-                countriesViewModel: countriesViewModel,
-                text: 'Ethnic group: ',
-                text2: countriesViewModel.selectedCountry!.altSpellings
-                    .toString()
-                    .replaceAll('[', '')
-                    .replaceAll(']', ''),
-              ),
-              addVerticalSpace(8.0.sp),
-              ReuseRichText(
-                countriesViewModel: countriesViewModel,
-                text: 'Religion: ',
-                text2: '${countriesViewModel.selectedCountry!.name!.official}',
-              ),
-            ],
-          ),
-          addVerticalSpace(10.5.sp),
-          ReuseColumn(
-            countriesViewModel: countriesViewModel,
-            widget: [
-              ReuseRichText(
-                countriesViewModel: countriesViewModel,
-                text: 'Independence: ',
-                text2: '${countriesViewModel.selectedCountry!.idd!.root}',
-              ),
-              addVerticalSpace(8.0.sp),
-              ReuseRichText(
-                countriesViewModel: countriesViewModel,
-                text: 'Area: ',
-                text2: '${countriesViewModel.selectedCountry!.area}',
-              ),
-            ],
-          ),
-          ReuseColumn(
-            countriesViewModel: countriesViewModel,
-            widget: [
-              ReuseRichText(
+            addVerticalSpace(24.sp),
+            ReuseColumn(
+              countriesViewModel: countriesViewModel,
+              widget: [
+                ReuseRichText(
                   countriesViewModel: countriesViewModel,
-                  text: 'Time zone: ',
-                  text2: countriesViewModel.selectedCountry!.timezones
+                  text: 'Population: ',
+                  text2: '${countriesViewModel.selectedCountry!.population}',
+                ),
+                addVerticalSpace(8.0),
+                ReuseRichText(
+                  countriesViewModel: countriesViewModel,
+                  text: 'Region: ',
+                  text2:
+                      '${countriesViewModel.selectedCountry!.region.toString().replaceAll('Region.', '')}',
+                ),
+                addVerticalSpace(8.0),
+                ReuseRichText(
+                  countriesViewModel: countriesViewModel,
+                  text: 'Capital: ',
+                  text2: countriesViewModel.selectedCountry!.capital
                       .toString()
                       .replaceAll('[', '')
-                      .replaceAll(']', '')),
-              addVerticalSpace(8.0.sp),
-              ReuseRichText(
+                      .replaceAll(']', ''),
+                ),
+              ],
+            ),
+            addVerticalSpace(12.5.sp),
+            ReuseColumn(
+              countriesViewModel: countriesViewModel,
+              widget: [
+                ReuseRichText(
                   countriesViewModel: countriesViewModel,
-                  text: 'Date format',
-                  text2: '${countriesViewModel.selectedCountry!.gini}'),
-              addVerticalSpace(8.0.sp),
-              ReuseRichText(
+                  text: 'Official language: ',
+                  text2: countriesViewModel.selectedCountry!.languages
+                      .toString()
+                      .replaceAll('{', '')
+                      .replaceAll('}', ''),
+                ),
+                addVerticalSpace(8.0.sp),
+                ReuseRichText(
                   countriesViewModel: countriesViewModel,
-                  text: 'Driving side: ',
-                  text2: '${countriesViewModel.selectedCountry!.car!.side}'),
-            ],
-          ),
-        ],
+                  text: 'Ethnic group: ',
+                  text2: countriesViewModel.selectedCountry!.altSpellings!.first
+                      .toString()
+                      .replaceAll('[', '')
+                      .replaceAll(']', ''),
+                ),
+                addVerticalSpace(8.0.sp),
+                ReuseRichText(
+                  countriesViewModel: countriesViewModel,
+                  text: 'Religion: ',
+                  text2:
+                      '${countriesViewModel.selectedCountry!.name!.official}',
+                ),
+              ],
+            ),
+            addVerticalSpace(10.5.sp),
+            ReuseColumn(
+              countriesViewModel: countriesViewModel,
+              widget: [
+                ReuseRichText(
+                  countriesViewModel: countriesViewModel,
+                  text: 'Independence: ',
+                  text2: '${countriesViewModel.selectedCountry!.independent}',
+                ),
+                addVerticalSpace(8.0.sp),
+                ReuseRichText(
+                  countriesViewModel: countriesViewModel,
+                  text: 'Area: ',
+                  text2: '${countriesViewModel.selectedCountry!.area}',
+                ),
+              ],
+            ),
+            ReuseColumn(
+              countriesViewModel: countriesViewModel,
+              widget: [
+                ReuseRichText(
+                    countriesViewModel: countriesViewModel,
+                    text: 'Time zone: ',
+                    text2: countriesViewModel.selectedCountry!.timezones
+                        .toString()
+                        .replaceAll('[', '')
+                        .replaceAll(']', '')),
+                addVerticalSpace(8.0.sp),
+                ReuseRichText(
+                    countriesViewModel: countriesViewModel,
+                    text: 'Date format:',
+                    text2: '${countriesViewModel.selectedCountry!.gini}'),
+                addVerticalSpace(8.0.sp),
+                ReuseRichText(
+                    countriesViewModel: countriesViewModel,
+                    text: 'Driving side: ',
+                    text2:
+                        '${countriesViewModel.selectedCountry!.car!.side.toString().replaceAll('Side.', '')}'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -173,10 +179,14 @@ class ReuseRichText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = MediaQuery.of(context).platformBrightness;
     return RichText(
       text: TextSpan(
           text: text,
-          style: Constants.swipesTextStyle1,
+          style: Constants.swipesTextStyle1.copyWith(
+              color: theme == Brightness.dark
+                  ? Constants.scaffoldBackgroundlightTheme
+                  : Constants.scaffoldBackgrounddarkTheme),
           children: [TextSpan(text: text2, style: Constants.swipesTextStyle2)]),
       // child: Text(
       //     'Population: ${countriesViewModel.selectedCountry!.population}'),
