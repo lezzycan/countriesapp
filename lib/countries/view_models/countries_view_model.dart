@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:hng_stage_3_task/countries/model/contries_model.dart';
 import 'package:hng_stage_3_task/countries/model/country_error.dart';
 import 'package:hng_stage_3_task/countries/repo/api_status.dart';
 import 'package:hng_stage_3_task/countries/repo/country_service.dart';
-
-import '../model/country_model.dart';
 
 class CountriesViewModel extends ChangeNotifier {
   bool _isLoading = false;
@@ -70,8 +69,9 @@ class CountriesViewModel extends ChangeNotifier {
       final countryCapital = country.capital.toString().toLowerCase();
       final region = country.region.toString().toLowerCase();
       final input = query.toLowerCase();
-      return countryName.contains(input) || countryCapital.contains(input) ||
-      region.contains(input);
+      return countryName.contains(input) ||
+          countryCapital.contains(input) ||
+          region.contains(input);
     }).toList();
 
     setCountriesModel(suggestions);
@@ -99,4 +99,20 @@ class CountriesViewModel extends ChangeNotifier {
   //     return countriesName.contains(query);
   //   }).toList();
   // }
+  ThemeMode _themeMode = ThemeMode.system;
+
+  ThemeMode get themeMode => _themeMode;
+
+  void setThemeMode({required bool isDarkMode}) {
+    _themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+    notifyListeners();
+  }
+
+  void turnOnDarkMode() {
+    setThemeMode(isDarkMode: true);
+  }
+
+  void turnOnLightMode() {
+    setThemeMode(isDarkMode: false);
+  }
 }

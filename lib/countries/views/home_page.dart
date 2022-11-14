@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hng_stage_3_task/components/api_error.dart';
 import 'package:hng_stage_3_task/components/app_loading.dart';
 import 'package:hng_stage_3_task/components/helper_tools.dart';
 import 'package:hng_stage_3_task/components/showbottom_ui.dart';
 import 'package:hng_stage_3_task/utils/navigation_utils.dart';
+import 'package:hng_stage_3_task/utils/themes.dart';
 import 'package:provider/provider.dart';
 import '../../components/search_input_panel.dart';
 import '../../utils/constants.dart';
@@ -37,61 +39,98 @@ class _HomePageState extends State<HomePage> {
   //  })
   //   super.initState();
   // }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     CountriesViewModel countriesViewModel = context.watch<CountriesViewModel>();
+    final colorThemes = Theme.of(context).colorScheme;
+    var colorTheme = MediaQuery.of(context).platformBrightness;
     return GestureDetector(
       onTap: (() {
         FocusScope.of(context).unfocus();
       }),
       child: Scaffold(
-          body: SafeArea(
-        child: SizedBox(
-          height: size.height,
-          width: size.width,
-          child: RefreshIndicator(
-            strokeWidth: 4.0,
-            backgroundColor: Colors.cyan,
-            onRefresh: () => countriesViewModel.getCountries(),
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: ListView(
-                primary: true,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Explore',
-                        style: TextStyle(
-                          fontSize: 30.sp,
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
+          appBar: AppBar(
+            leadingWidth: 500,
+            toolbarHeight: 30,
+            leading: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    'Explore',
+                    style: GoogleFonts.elsieSwashCaps(
+                        fontSize: 24,
+                        color:colorTheme == Brightness.dark ?
+                        Constants.scaffoldBackgroundlightTheme:
+                        Constants.scaffoldBackgrounddarkTheme ,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Text(
+                  '.',
+                  style: GoogleFonts.elsieSwashCaps(
+                      fontSize: 30,
+                      color: colorThemes.error,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: colorThemes.secondary,
+                  ),
+                  child: Theme.of(context).brightness == Brightness.dark
+                      ? IconButton(
+                          onPressed: countriesViewModel.turnOnLightMode,
+                          icon: Icon(
+                            Icons.dark_mode_sharp,
+                            color: colorThemes.surface,
+                            size: 25,
                           ),
-                          child: Icon(Icons.mode_night_rounded)),
+                        )
+                      : IconButton(
+                          onPressed: countriesViewModel.turnOnDarkMode,
+                          color: colorThemes.surface,
+                          icon: const Icon(Icons.light_mode, size: 25),
+                        ),
+                ),
+              ),
+            ],
+          ),
+          body: SafeArea(
+            child: SizedBox(
+              height: size.height,
+              width: size.width,
+              child: RefreshIndicator(
+                strokeWidth: 4.0,
+                backgroundColor: Colors.cyan,
+                onRefresh: () => countriesViewModel.getCountries(),
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: ListView(
+                    primary: true,
+                    children: [
+                      SearchInputPanel(
+                        text: countriesViewModel.query,
+                        onchanged: (value) =>
+                            countriesViewModel.searchCountry(value),
+                      ),
+                      addVerticalSpace(10.sp),
+                      _iconRow(context),
+                      addVerticalSpace(15.sp),
+                      _ui(countriesViewModel, context)
                     ],
                   ),
-                  addVerticalSpace(24.sp),
-                  SearchInputPanel(
-                    text: countriesViewModel.query,
-                    onchanged: (value) =>
-                        countriesViewModel.searchCountry(value),
-                  ),
-                  addVerticalSpace(10.sp),
-                  _iconRow(context),
-                  addVerticalSpace(15.sp),
-                  _ui(countriesViewModel, context)
-                ],
+                ),
               ),
             ),
-          ),
-        ),
-      )),
+          )),
     );
   }
 
@@ -114,41 +153,42 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: [
                 IconButton(
-                   icon: Icon(Icons.language, size: 30,), 
-                   onPressed: () { 
+                  icon: Icon(
+                    Icons.language,
+                    size: 30,
+                  ),
+                  onPressed: () {
                     showModalBottomSheet(
-            constraints: BoxConstraints.expand(),
-            enableDrag: true,
-            backgroundColor: theme == Brightness.dark
-                ? Constants.scaffoldBackgrounddarkTheme
-                : Constants.scaffoldBackgroundlightTheme,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20))),
-            context: context,
-            builder: ((context) {
-              return SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                child: Container(
-                  height: 500.h,
-                 
-                    child:  ListTile(
-                        leading: Text('Language'),
-                        trailing: IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(Icons.close)),
-                      ),
-                     // addVerticalSpace(10.sp),
-                      
-                 
-                ),
-              );
-            }),
-            );
-                   },
+                      constraints: BoxConstraints.expand(),
+                      enableDrag: true,
+                      backgroundColor: theme == Brightness.dark
+                          ? Constants.scaffoldBackgrounddarkTheme
+                          : Constants.scaffoldBackgroundlightTheme,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      context: context,
+                      builder: ((context) {
+                        return SingleChildScrollView(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          child: Container(
+                            height: 500.h,
+
+                            child: ListTile(
+                              leading: Text('Language'),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: Icon(Icons.close)),
+                            ),
+                            // addVerticalSpace(10.sp),
+                          ),
+                        );
+                      }),
+                    );
+                  },
                 ),
                 addHorizontalSpace(10.sp),
                 FittedBox(
