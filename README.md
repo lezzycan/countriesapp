@@ -1,16 +1,12 @@
 # hng_stage_3_task
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The app displays list of countries with capital, flags, languages. The app is able to show the details of each coutry in terms of time zones, languages, coat of arms.
+The app is written in flutter and it make it accessible for users to know the countries in the world and their details.
+flutter screenUtil is used for responsiveness
+https package is used to fetch data from the endpoint
+Fancy shimmer image is used to display coutries images and shows error widget incase there is an erro with the image provider
+provider is used as the state management
+card swipper is to used swipes between the images.
+I would like to add each country 
+The api has some dmmy datas that are not to be used.
+appettize link : https://appetize.io/app/hwix3hz4z6knzfqcy7pfpkfhyi
